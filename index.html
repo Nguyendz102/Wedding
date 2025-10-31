@@ -21,6 +21,7 @@
             --light-color: #fff9fb;
             --dark-pink: #e75480;
             --cream-white: #fffaf0;
+            --fa-red: #dc3545;
         }
 
         body {
@@ -95,10 +96,14 @@
 
         .welcome-heart {
             position: absolute;
-            color: var(--cream-white);
-            font-size: 24px;
             animation: floatUp 8s linear infinite;
             opacity: 0.7;
+        }
+
+        .welcome-heart svg {
+            width: 24px;
+            height: 24px;
+            fill: var(--cream-white);
         }
 
         /* Main Content */
@@ -150,6 +155,9 @@
             animation: fadeInUp 1.5s forwards 0.5s;
             font-weight: 500;
             color: var(--cream-white);
+            display: flex;
+            align-items: center;
+            gap: 20px;
         }
 
         .wedding-date {
@@ -164,11 +172,17 @@
         }
 
         .heart {
-            color: var(--cream-white);
-            font-size: 2.5rem;
-            margin: 0 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             animation: heartbeat 1.5s infinite;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .heart svg {
+            width: 40px;
+            height: 40px;
+            fill: var(--cream-white);
+            filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.3));
         }
 
         /* Countdown */
@@ -266,12 +280,18 @@
         }
 
         .wedding-day::after {
-            content: '❤';
+            content: '';
             position: absolute;
             top: -5px;
             right: -5px;
-            font-size: 1rem;
+            width: 16px;
+            height: 16px;
             animation: pulse 2s infinite;
+        }
+
+        .wedding-day::after {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23dc3545' d='M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z'/%3E%3C/svg%3E");
+            background-size: contain;
         }
 
         /* Parents Section */
@@ -775,10 +795,14 @@
 
         .floating-heart {
             position: absolute;
-            color: var(--primary-color);
-            font-size: 20px;
             animation: float 15s infinite linear;
             opacity: 0.7;
+        }
+
+        .floating-heart svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-color);
         }
 
         @keyframes float {
@@ -803,10 +827,14 @@
 
         .falling-heart {
             position: absolute;
-            color: var(--primary-color);
-            font-size: 20px;
             animation: fall linear forwards;
             opacity: 0.7;
+        }
+
+        .falling-heart svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--primary-color);
         }
 
         @keyframes fall {
@@ -827,6 +855,8 @@
             
             .couple-names {
                 font-size: 3.5rem;
+                flex-direction: column;
+                gap: 10px;
             }
             
             .wedding-date {
@@ -988,7 +1018,10 @@
             <h1 class="welcome-title">Thiệp Mời Đám Cưới</h1>
             <p class="welcome-subtitle">Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi</p>
             <button class="open-invitation" id="openInvitation">
-                Mở Thiệp Mời <i class="fas fa-heart" style="margin-left: 10px;"></i>
+                Mở Thiệp Mời 
+                <svg style="width: 20px; height: 20px; margin-left: 10px; fill: currentColor;" viewBox="0 0 512 512">
+                    <path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/>
+                </svg>
             </button>
         </div>
         <div class="welcome-hearts" id="welcomeHearts"></div>
@@ -1004,7 +1037,15 @@
 
         <!-- Header Section -->
         <header class="header">
-            <h1 class="couple-names">Việt Cường <span class="heart">❤</span> Thùy Trang</h1>
+            <h1 class="couple-names">
+                Việt Cường 
+                <span class="heart">
+                    <svg viewBox="0 0 512 512">
+                        <path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/>
+                    </svg>
+                </span>
+                Thùy Trang
+            </h1>
             <p class="wedding-date">04 . 12 . 2025</p>
             
             <div class="countdown">
@@ -1266,6 +1307,9 @@
     </div>
 
     <script>
+        // Heart SVG template
+        const heartSVG = `<svg viewBox="0 0 512 512"><path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/></svg>`;
+
         // Welcome Screen Animation
         function createWelcomeHearts() {
             const container = document.getElementById('welcomeHearts');
@@ -1274,7 +1318,7 @@
             for (let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('welcome-heart');
-                heart.innerHTML = '❤';
+                heart.innerHTML = heartSVG;
                 
                 // Random properties
                 const size = Math.random() * 30 + 20;
@@ -1342,7 +1386,7 @@
             for (let i = 0; i < heartCount; i++) {
                 const heart = document.createElement('div');
                 heart.classList.add('floating-heart');
-                heart.innerHTML = '❤';
+                heart.innerHTML = heartSVG;
                 
                 // Random properties
                 const size = Math.random() * 20 + 10;
@@ -1366,7 +1410,7 @@
             setInterval(() => {
                 const heart = document.createElement('div');
                 heart.classList.add('falling-heart');
-                heart.innerHTML = '❤';
+                heart.innerHTML = heartSVG;
                 
                 // Random properties
                 const size = Math.random() * 20 + 10;
