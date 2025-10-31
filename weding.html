@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thiệp Mời Đám Cưới - Minh & An</title>
+    <title>Thiệp Mời Đám Cưới - Việt Cường & Thùy Trang</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -20,6 +20,7 @@
             --text-color: #8a5a6d;
             --light-color: #fff9fb;
             --dark-pink: #e75480;
+            --cream-white: #fffaf0;
         }
 
         body {
@@ -28,6 +29,82 @@
             color: var(--text-color);
             overflow-x: hidden;
             scroll-behavior: smooth;
+        }
+
+        /* Welcome Screen */
+        .welcome-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--dark-pink));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: var(--cream-white);
+        }
+
+        .welcome-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .welcome-subtitle {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .open-invitation {
+            background: transparent;
+            border: 2px solid var(--cream-white);
+            color: var(--cream-white);
+            padding: 15px 40px;
+            border-radius: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: bounce 2s infinite;
+        }
+
+        .open-invitation:hover {
+            background: var(--cream-white);
+            color: var(--dark-pink);
+            transform: scale(1.05);
+        }
+
+        .welcome-hearts {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .welcome-heart {
+            position: absolute;
+            color: var(--cream-white);
+            font-size: 24px;
+            animation: floatUp 8s linear infinite;
+            opacity: 0.7;
+        }
+
+        /* Main Content */
+        .main-content {
+            opacity: 0;
+            transition: opacity 1s ease-in;
         }
 
         .container {
@@ -45,7 +122,7 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            color: var(--text-color);
+            color: var(--cream-white);
             position: relative;
             overflow: hidden;
         }
@@ -67,12 +144,12 @@
             font-family: 'Great Vibes', cursive;
             font-size: 5.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 8px rgba(138, 90, 109, 0.2);
+            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1.5s forwards 0.5s;
             font-weight: 500;
-            color: var(--dark-pink);
+            color: var(--cream-white);
         }
 
         .wedding-date {
@@ -82,14 +159,16 @@
             opacity: 0;
             transform: translateY(30px);
             animation: fadeInUp 1.5s forwards 1s;
-            color: var(--text-color);
+            color: var(--cream-white);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         .heart {
-            color: var(--dark-pink);
+            color: var(--cream-white);
             font-size: 2.5rem;
             margin: 0 15px;
             animation: heartbeat 1.5s infinite;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         /* Countdown */
@@ -104,26 +183,28 @@
         }
 
         .countdown-item {
-            background: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 15px;
             padding: 15px 10px;
             min-width: 80px;
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(138, 90, 109, 0.1);
-            border: 2px solid var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(138, 90, 109, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.5);
         }
 
         .countdown-number {
             font-size: 2rem;
             font-weight: bold;
             display: block;
-            color: var(--dark-pink);
+            color: var(--cream-white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
         .countdown-label {
             font-size: 0.8rem;
             text-transform: uppercase;
-            color: var(--text-color);
+            color: var(--cream-white);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         /* Calendar Section */
@@ -181,6 +262,7 @@
             background: var(--primary-color);
             color: white;
             position: relative;
+            font-weight: bold;
         }
 
         .wedding-day::after {
@@ -651,6 +733,35 @@
             }
         }
 
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
         /* Floating hearts */
         .floating-hearts {
             position: fixed;
@@ -706,6 +817,14 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 3rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.5rem;
+            }
+            
             .couple-names {
                 font-size: 3.5rem;
             }
@@ -777,6 +896,14 @@
         }
 
         @media (max-width: 480px) {
+            .welcome-title {
+                font-size: 2.5rem;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1.2rem;
+            }
+            
             .couple-names {
                 font-size: 2.8rem;
             }
@@ -855,303 +982,341 @@
     </style>
 </head>
 <body>
-    <!-- Floating hearts background -->
-    <div class="floating-hearts" id="floatingHearts"></div>
-    
-    <!-- Falling hearts -->
-    <div class="falling-hearts" id="fallingHearts"></div>
+    <!-- Welcome Screen -->
+    <div class="welcome-screen" id="welcomeScreen">
+        <div class="welcome-content">
+            <h1 class="welcome-title">Thiệp Mời Đám Cưới</h1>
+            <p class="welcome-subtitle">Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi</p>
+            <button class="open-invitation" id="openInvitation">
+                Mở Thiệp Mời <i class="fas fa-heart" style="margin-left: 10px;"></i>
+            </button>
+        </div>
+        <div class="welcome-hearts" id="welcomeHearts"></div>
+    </div>
 
-    <!-- Header Section -->
-    <header class="header">
-        <h1 class="couple-names">Minh <span class="heart">❤</span> An</h1>
-        <p class="wedding-date">20 . 10 . 2024</p>
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Floating hearts background -->
+        <div class="floating-hearts" id="floatingHearts"></div>
         
-        <div class="countdown">
-            <div class="countdown-item">
-                <span class="countdown-number" id="days">00</span>
-                <span class="countdown-label">Ngày</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="hours">00</span>
-                <span class="countdown-label">Giờ</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="minutes">00</span>
-                <span class="countdown-label">Phút</span>
-            </div>
-            <div class="countdown-item">
-                <span class="countdown-number" id="seconds">00</span>
-                <span class="countdown-label">Giây</span>
-            </div>
-        </div>
-    </header>
+        <!-- Falling hearts -->
+        <div class="falling-hearts" id="fallingHearts"></div>
 
-    <!-- Calendar Section -->
-    <section class="calendar-section">
-        <div class="container">
-            <h2 class="section-title">Ngày Trọng Đại</h2>
-            <div class="calendar-container fade-in-up">
-                <h3 class="calendar-header">Tháng 10, 2024</h3>
-                <div class="calendar">
-                    <div class="calendar-day">CN</div>
-                    <div class="calendar-day">T2</div>
-                    <div class="calendar-day">T3</div>
-                    <div class="calendar-day">T4</div>
-                    <div class="calendar-day">T5</div>
-                    <div class="calendar-day">T6</div>
-                    <div class="calendar-day">T7</div>
-                    
-                    <div class="calendar-date"></div>
-                    <div class="calendar-date"></div>
-                    <div class="calendar-date">1</div>
-                    <div class="calendar-date">2</div>
-                    <div class="calendar-date">3</div>
-                    <div class="calendar-date">4</div>
-                    <div class="calendar-date">5</div>
-                    
-                    <div class="calendar-date">6</div>
-                    <div class="calendar-date">7</div>
-                    <div class="calendar-date">8</div>
-                    <div class="calendar-date">9</div>
-                    <div class="calendar-date">10</div>
-                    <div class="calendar-date">11</div>
-                    <div class="calendar-date">12</div>
-                    
-                    <div class="calendar-date">13</div>
-                    <div class="calendar-date">14</div>
-                    <div class="calendar-date">15</div>
-                    <div class="calendar-date">16</div>
-                    <div class="calendar-date">17</div>
-                    <div class="calendar-date">18</div>
-                    <div class="calendar-date">19</div>
-                    
-                    <div class="calendar-date wedding-day">20</div>
-                    <div class="calendar-date">21</div>
-                    <div class="calendar-date">22</div>
-                    <div class="calendar-date">23</div>
-                    <div class="calendar-date">24</div>
-                    <div class="calendar-date">25</div>
-                    <div class="calendar-date">26</div>
-                    
-                    <div class="calendar-date">27</div>
-                    <div class="calendar-date">28</div>
-                    <div class="calendar-date">29</div>
-                    <div class="calendar-date">30</div>
-                    <div class="calendar-date">31</div>
-                    <div class="calendar-date"></div>
-                    <div class="calendar-date"></div>
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="couple-names">Việt Cường <span class="heart">❤</span> Thùy Trang</h1>
+            <p class="wedding-date">04 . 12 . 2025</p>
+            
+            <div class="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">00</span>
+                    <span class="countdown-label">Ngày</span>
                 </div>
-                <p>Hãy đánh dấu ngày trọng đại của chúng tôi!</p>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Giờ</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Phút</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Giây</span>
+                </div>
             </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- Parents Section -->
-    <section class="parents-section">
-        <div class="container">
-            <h2 class="section-title">Hai Gia Đình</h2>
-            <div class="parents-container">
-                <div class="parent-card fade-in-left">
-                    <h3 class="parent-title">Nhà Trai</h3>
-                    <div class="parent-name">Ông Nguyễn Văn A</div>
-                    <div class="parent-name">Bà Nguyễn Thị C</div>
-                    <div class="parent-couple">Chú rể: Minh</div>
-                    <div class="qr-container">
-                        <div class="qr-code">
-                            <i class="fas fa-qrcode" style="font-size: 50px; color: var(--dark-pink);"></i>
+        <!-- Calendar Section -->
+        <section class="calendar-section">
+            <div class="container">
+                <h2 class="section-title">Ngày Trọng Đại</h2>
+                <div class="calendar-container fade-in-up">
+                    <h3 class="calendar-header">Tháng 12, 2025</h3>
+                    <div class="calendar">
+                        <div class="calendar-day">CN</div>
+                        <div class="calendar-day">T2</div>
+                        <div class="calendar-day">T3</div>
+                        <div class="calendar-day">T4</div>
+                        <div class="calendar-day">T5</div>
+                        <div class="calendar-day">T6</div>
+                        <div class="calendar-day">T7</div>
+                        
+                        <div class="calendar-date"></div>
+                        <div class="calendar-date">1</div>
+                        <div class="calendar-date">2</div>
+                        <div class="calendar-date">3</div>
+                        <div class="calendar-date wedding-day">4</div>
+                        <div class="calendar-date">5</div>
+                        <div class="calendar-date">6</div>
+                        
+                        <div class="calendar-date">7</div>
+                        <div class="calendar-date">8</div>
+                        <div class="calendar-date">9</div>
+                        <div class="calendar-date">10</div>
+                        <div class="calendar-date">11</div>
+                        <div class="calendar-date">12</div>
+                        <div class="calendar-date">13</div>
+                        
+                        <div class="calendar-date">14</div>
+                        <div class="calendar-date">15</div>
+                        <div class="calendar-date">16</div>
+                        <div class="calendar-date">17</div>
+                        <div class="calendar-date">18</div>
+                        <div class="calendar-date">19</div>
+                        <div class="calendar-date">20</div>
+                        
+                        <div class="calendar-date">21</div>
+                        <div class="calendar-date">22</div>
+                        <div class="calendar-date">23</div>
+                        <div class="calendar-date">24</div>
+                        <div class="calendar-date">25</div>
+                        <div class="calendar-date">26</div>
+                        <div class="calendar-date">27</div>
+                        
+                        <div class="calendar-date">28</div>
+                        <div class="calendar-date">29</div>
+                        <div class="calendar-date">30</div>
+                        <div class="calendar-date">31</div>
+                        <div class="calendar-date"></div>
+                        <div class="calendar-date"></div>
+                        <div class="calendar-date"></div>
+                    </div>
+                    <p>Hãy đánh dấu ngày trọng đại của chúng tôi!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Parents Section -->
+        <section class="parents-section">
+            <div class="container">
+                <h2 class="section-title">Hai Gia Đình</h2>
+                <div class="parents-container">
+                    <div class="parent-card fade-in-left">
+                        <h3 class="parent-title">Nhà Trai</h3>
+                        <div class="parent-name">Ông Nguyễn Văn A</div>
+                        <div class="parent-name">Bà Nguyễn Thị C</div>
+                        <div class="parent-couple">Chú rể: Việt Cường</div>
+                        <div class="qr-container">
+                            <div class="qr-code">
+                                <i class="fas fa-qrcode" style="font-size: 50px; color: var(--dark-pink);"></i>
+                            </div>
+                            <p class="qr-text">Quét mã QR để mừng cưới online</p>
                         </div>
-                        <p class="qr-text">Quét mã QR để mừng cưới online</p>
                     </div>
-                </div>
-                <div class="parent-card right fade-in-right">
-                    <h3 class="parent-title">Nhà Gái</h3>
-                    <div class="parent-name">Ông Nguyễn Văn C</div>
-                    <div class="parent-name">Bà Nguyễn Thị D</div>
-                    <div class="parent-couple">Cô dâu: An</div>
-                    <div class="qr-container">
-                        <div class="qr-code">
-                            <i class="fas fa-qrcode" style="font-size: 50px; color: var(--dark-pink);"></i>
+                    <div class="parent-card right fade-in-right">
+                        <h3 class="parent-title">Nhà Gái</h3>
+                        <div class="parent-name">Ông Nguyễn Văn C</div>
+                        <div class="parent-name">Bà Nguyễn Thị D</div>
+                        <div class="parent-couple">Cô dâu: Thùy Trang</div>
+                        <div class="qr-container">
+                            <div class="qr-code">
+                                <i class="fas fa-qrcode" style="font-size: 50px; color: var(--dark-pink);"></i>
+                            </div>
+                            <p class="qr-text">Quét mã QR để mừng cưới online</p>
                         </div>
-                        <p class="qr-text">Quét mã QR để mừng cưới online</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Our Story Section -->
-    <section class="section our-story">
-        <div class="container">
-            <h2 class="section-title">Câu Chuyện Của Chúng Tôi</h2>
-            <div class="story-container">
-                <div class="story-image fade-in-left">
-                    <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Our Story">
-                </div>
-                <div class="story-text fade-in-right">
-                    <p>Chúng tôi gặp nhau vào một ngày mưa thu năm 2018, tại một quán cà phê nhỏ ở trung tâm thành phố. Từ cái nhìn đầu tiên, cả hai đều cảm nhận được một sự kết nối đặc biệt.</p>
-                    <p>Trải qua 5 năm bên nhau, chúng tôi đã cùng nhau vượt qua nhiều thử thách và xây dựng những kỷ niệm đẹp. Mỗi khoảnh khắc bên nhau đều là những trang sách quý giá trong cuốn nhật ký tình yêu của chúng tôi.</p>
-                    <p>Và bây giờ, chúng tôi muốn mời bạn cùng tham dự ngày trọng đại nhất của cuộc đời mình - ngày chúng tôi chính thức trở thành vợ chồng.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Wedding Details Section -->
-    <section class="section wedding-details">
-        <div class="container">
-            <h2 class="section-title">Thông Tin Lễ Cưới</h2>
-            <div class="details-container">
-                <div class="detail-card fade-in-up">
-                    <div class="detail-icon">
-                        <i class="fas fa-church"></i>
+        <!-- Our Story Section -->
+        <section class="section our-story">
+            <div class="container">
+                <h2 class="section-title">Câu Chuyện Của Chúng Tôi</h2>
+                <div class="story-container">
+                    <div class="story-image fade-in-left">
+                        <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Our Story">
                     </div>
-                    <h3 class="detail-title">Lễ Thành Hôn</h3>
-                    <p>10:00 Sáng - 20.10.2024</p>
-                    <p>Nhà thờ Đức Bà Sài Gòn</p>
-                    <p>01 Công xã Paris, Bến Nghé, Quận 1, TP.HCM</p>
-                    <button class="map-btn">Xem Bản Đồ</button>
-                </div>
-                <div class="detail-card fade-in-up" style="transition-delay: 0.2s;">
-                    <div class="detail-icon">
-                        <i class="fas fa-glass-cheers"></i>
-                    </div>
-                    <h3 class="detail-title">Tiệc Cưới Nhà Trai</h3>
-                    <p>11:30 Trưa - 20.10.2024</p>
-                    <p>Khách sạn Reverie Sài Gòn</p>
-                    <p>22-36 Nguyễn Huệ, Quận 1, TP.HCM</p>
-                    <button class="map-btn">Xem Bản Đồ</button>
-                </div>
-                <div class="detail-card fade-in-up" style="transition-delay: 0.4s;">
-                    <div class="detail-icon">
-                        <i class="fas fa-glass-cheers"></i>
-                    </div>
-                    <h3 class="detail-title">Tiệc Cưới Nhà Gái</h3>
-                    <p>18:30 Tối - 21.10.2024</p>
-                    <p>Trung tâm Hội nghị GEM Center</p>
-                    <p>08 Nguyễn Bỉnh Khiêm, Đa Kao, Quận 1, TP.HCM</p>
-                    <button class="map-btn">Xem Bản Đồ</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Section - Updated for 2 images per row -->
-    <section class="gallery">
-        <div class="container">
-            <h2 class="section-title">Khoảnh Khắc Đẹp</h2>
-            <div class="gallery-container">
-                <!-- Row 1 -->
-                <div class="gallery-row fade-in-up">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 1">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 2">
-                    </div>
-                </div>
-                
-                <!-- Row 2 -->
-                <div class="gallery-row fade-in-up" style="transition-delay: 0.2s;">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 3">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 4">
-                    </div>
-                </div>
-                
-                <!-- Row 3 -->
-                <div class="gallery-row fade-in-up" style="transition-delay: 0.4s;">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 5">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 6">
-                    </div>
-                </div>
-                
-                <!-- Row 4 -->
-                <div class="gallery-row fade-in-up" style="transition-delay: 0.6s;">
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1440589473619-3cde28941638?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 7">
-                    </div>
-                    <div class="gallery-item">
-                        <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 8">
+                    <div class="story-text fade-in-right">
+                        <p>Chúng tôi gặp nhau vào một ngày mưa thu năm 2018, tại một quán cà phê nhỏ ở trung tâm thành phố. Từ cái nhìn đầu tiên, cả hai đều cảm nhận được một sự kết nối đặc biệt.</p>
+                        <p>Trải qua 5 năm bên nhau, chúng tôi đã cùng nhau vượt qua nhiều thử thách và xây dựng những kỷ niệm đẹp. Mỗi khoảnh khắc bên nhau đều là những trang sách quý giá trong cuốn nhật ký tình yêu của chúng tôi.</p>
+                        <p>Và bây giờ, chúng tôi muốn mời bạn cùng tham dự ngày trọng đại nhất của cuộc đời mình - ngày chúng tôi chính thức trở thành vợ chồng.</p>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- RSVP Section -->
-    <section class="section rsvp">
-        <div class="container">
-            <h2 class="section-title">Xác Nhận Tham Dự</h2>
-            <div class="rsvp-form fade-in-up">
-                <form id="rsvpForm">
-                    <div class="form-group">
-                        <label for="name">Họ và Tên</label>
-                        <input type="text" id="name" class="form-control" required>
+        <!-- Wedding Details Section -->
+        <section class="section wedding-details">
+            <div class="container">
+                <h2 class="section-title">Thông Tin Lễ Cưới</h2>
+                <div class="details-container">
+                    <div class="detail-card fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="detail-icon">
+                            <i class="fas fa-glass-cheers"></i>
+                        </div>
+                        <h3 class="detail-title">Tiệc Cưới Nhà Trai</h3>
+                        <p>16:30 Tối - 04.12.2025</p>
+                        <p>Tại gia</p>
+                        <p>Suối Hai, Ba Vì, Hà Nội</p>
+                        <button class="map-btn">Xem Bản Đồ</button>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" class="form-control" required>
+                    <div class="detail-card fade-in-up" style="transition-delay: 0.4s;">
+                        <div class="detail-icon">
+                            <i class="fas fa-glass-cheers"></i>
+                        </div>
+                        <h3 class="detail-title">Tiệc Cưới Nhà Gái</h3>
+                        <p>16:30 Tối - 04.12.2025</p>
+                        <p>Tại gia</p>
+                        <p>Suối Hai, Ba Vì, Hà Nội</p>
+                        <button class="map-btn">Xem Bản Đồ</button>
                     </div>
-                    <div class="form-group">
-                        <label for="guests">Số lượng khách</label>
-                        <select id="guests" class="form-control" required>
-                            <option value="1">1 người</option>
-                            <option value="2">2 người</option>
-                            <option value="3">3 người</option>
-                            <option value="4">4 người</option>
-                            <option value="5">5 người trở lên</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="event">Sự kiện tham dự</label>
-                        <select id="event" class="form-control" required>
-                            <option value="church">Lễ Thành Hôn</option>
-                            <option value="groom">Tiệc Cưới Nhà Trai</option>
-                            <option value="bride">Tiệc Cưới Nhà Gái</option>
-                            <option value="all">Tất cả sự kiện</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Lời nhắn gửi đến cô dâu chú rể</label>
-                        <textarea id="message" class="form-control" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn">Gửi Lời Mời</button>
-                </form>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Thank You Section -->
-    <section class="thank-you">
-        <div class="thank-you-content fade-in">
-            <h2 class="thank-you-title">Cảm Ơn!</h2>
-            <p class="thank-you-text">Chúng tôi chân thành cảm ơn tình cảm và sự quan tâm của quý vị. 
-            Sự hiện diện của quý vị sẽ làm cho ngày trọng đại của chúng tôi thêm ý nghĩa và trọn vẹn.</p>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p class="footer-text">Chúng tôi rất mong được đón tiếp bạn trong ngày trọng đại của chúng tôi!</p>
-            <div class="social-icons">
-                <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+        <!-- Gallery Section - Updated for 2 images per row -->
+        <section class="gallery">
+            <div class="container">
+                <h2 class="section-title">Khoảnh Khắc Đẹp</h2>
+                <div class="gallery-container">
+                    <!-- Row 1 -->
+                    <div class="gallery-row fade-in-up">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 1">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 2">
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="gallery-row fade-in-up" style="transition-delay: 0.2s;">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 3">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 4">
+                        </div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="gallery-row fade-in-up" style="transition-delay: 0.4s;">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 5">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 6">
+                        </div>
+                    </div>
+                    
+                    <!-- Row 4 -->
+                    <div class="gallery-row fade-in-up" style="transition-delay: 0.6s;">
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1440589473619-3cde28941638?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 7">
+                        </div>
+                        <div class="gallery-item">
+                            <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 8">
+                        </div>
+                    </div>
+                </div>
             </div>
-            <p>Minh & An</p>
-        </div>
-    </footer>
+        </section>
+
+        <!-- RSVP Section -->
+        <section class="section rsvp">
+            <div class="container">
+                <h2 class="section-title">Xác Nhận Tham Dự</h2>
+                <div class="rsvp-form fade-in-up">
+                    <form id="rsvpForm">
+                        <div class="form-group">
+                            <label for="name">Họ và Tên</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event">Sự kiện tham dự</label>
+                            <select id="event" class="form-control" required>
+                                <option value="groom">Tiệc Cưới Nhà Trai</option>
+                                <option value="bride">Tiệc Cưới Nhà Gái</option>
+                                <option value="all">Tất cả sự kiện</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Lời nhắn gửi đến cô dâu chú rể</label>
+                            <textarea id="message" class="form-control" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Gửi Lời Mời</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Thank You Section -->
+        <section class="thank-you">
+            <div class="thank-you-content fade-in">
+                <h2 class="thank-you-title">Cảm Ơn!</h2>
+                <p class="thank-you-text">Chúng tôi chân thành cảm ơn tình cảm và sự quan tâm của quý vị. 
+                Sự hiện diện của quý vị sẽ làm cho ngày trọng đại của chúng tôi thêm ý nghĩa và trọn vẹn.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <p class="footer-text">Chúng tôi rất mong được đón tiếp bạn trong ngày trọng đại của chúng tôi!</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                </div>
+                <p>Việt Cường & Thùy Trang</p>
+            </div>
+        </footer>
+    </div>
 
     <script>
-        // Countdown timer
+        // Welcome Screen Animation
+        function createWelcomeHearts() {
+            const container = document.getElementById('welcomeHearts');
+            const heartCount = 20;
+
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('welcome-heart');
+                heart.innerHTML = '❤';
+                
+                // Random properties
+                const size = Math.random() * 30 + 20;
+                const left = Math.random() * 100;
+                const animationDuration = Math.random() * 10 + 8;
+                const animationDelay = Math.random() * 5;
+                
+                heart.style.fontSize = `${size}px`;
+                heart.style.left = `${left}%`;
+                heart.style.animationDuration = `${animationDuration}s`;
+                heart.style.animationDelay = `${animationDelay}s`;
+                
+                container.appendChild(heart);
+            }
+        }
+
+        // Open Invitation
+        document.getElementById('openInvitation').addEventListener('click', function() {
+            const welcomeScreen = document.getElementById('welcomeScreen');
+            const mainContent = document.getElementById('mainContent');
+            
+            // Add fade out animation to welcome screen
+            welcomeScreen.style.opacity = '0';
+            welcomeScreen.style.transform = 'scale(1.1)';
+            
+            // Show main content after delay
+            setTimeout(() => {
+                welcomeScreen.style.display = 'none';
+                mainContent.style.opacity = '1';
+                
+                // Start background animations
+                createFloatingHearts();
+                createFallingHearts();
+                
+                // Start scroll animations
+                initScrollAnimations();
+            }, 1500);
+        });
+
+        // Countdown timer - UPDATED FOR DECEMBER 4, 2025
         function updateCountdown() {
-            const weddingDate = new Date('October 20, 2024 10:00:00').getTime();
+            const weddingDate = new Date('December 4, 2025 10:00:00').getTime();
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
@@ -1221,9 +1386,6 @@
             }, 300);
         }
 
-        createFloatingHearts();
-        createFallingHearts();
-
         // Form submission
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1238,28 +1400,33 @@
             });
         });
 
-        // Scroll animations for all elements
-        const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up, .fade-in-scale, .gallery-row');
+        // Scroll animations
+        function initScrollAnimations() {
+            const fadeElements = document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .fade-in-up, .fade-in-scale, .gallery-row');
 
-        const appearOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -50px 0px"
-        };
+            const appearOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
 
-        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) {
-                    return;
-                } else {
-                    entry.target.classList.add('is-visible');
-                    appearOnScroll.unobserve(entry.target);
-                }
+            const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    } else {
+                        entry.target.classList.add('is-visible');
+                        appearOnScroll.unobserve(entry.target);
+                    }
+                });
+            }, appearOptions);
+
+            fadeElements.forEach(element => {
+                appearOnScroll.observe(element);
             });
-        }, appearOptions);
+        }
 
-        fadeElements.forEach(element => {
-            appearOnScroll.observe(element);
-        });
+        // Initialize welcome screen
+        createWelcomeHearts();
     </script>
 </body>
 </html>
