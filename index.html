@@ -6,1024 +6,21 @@
     <title>Thiệp Mời Đám Cưới - Việt Cường & Thùy Trang</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary-color: #ff9eb5;
-            --secondary-color: #ffc2d4;
-            --accent-color: #ffe4ec;
-            --text-color: #8a5a6d;
-            --light-color: #fff9fb;
-            --dark-pink: #e75480;
-            --cream-white: #fffaf0;
-            --fa-red: #dc3545;
-        }
-
-        body {
-            font-family: 'Playfair Display', serif;
-            background: var(--light-color);
-            color: var(--text-color);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* Welcome Screen */
-        .welcome-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--primary-color), var(--dark-pink));
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 1.5s ease-out, transform 1.5s ease-out;
-        }
-
-        .welcome-content {
-            text-align: center;
-            color: var(--cream-white);
-        }
-
-        .welcome-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-            animation: pulse 2s infinite;
-        }
-
-        .welcome-subtitle {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        .open-invitation {
-            background: transparent;
-            border: 2px solid var(--cream-white);
-            color: var(--cream-white);
-            padding: 15px 40px;
-            border-radius: 30px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            animation: bounce 2s infinite;
-        }
-
-        .open-invitation:hover {
-            background: var(--cream-white);
-            color: var(--dark-pink);
-            transform: scale(1.05);
-        }
-
-        .welcome-hearts {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-        }
-
-        .welcome-heart {
-            position: absolute;
-            animation: floatUp 8s linear infinite;
-            opacity: 0.7;
-        }
-
-        .welcome-heart svg {
-            width: 24px;
-            height: 24px;
-            fill: var(--cream-white);
-        }
-
-        /* Main Content */
-        .main-content {
-            opacity: 0;
-            transition: opacity 1s ease-in;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header */
-        .header {
-            height: 100vh;
-            background: linear-gradient(rgba(255, 158, 181, 0.2), rgba(255, 194, 212, 0.2)), url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--cream-white);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ff9eb5" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
-            background-size: cover;
-            background-position: bottom;
-            opacity: 0.3;
-        }
-
-        .couple-names {
-            font-family: 'Great Vibes', cursive;
-            font-size: 5.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.5s forwards 0.5s;
-            font-weight: 500;
-            color: var(--cream-white);
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .wedding-date {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2.2rem;
-            margin-bottom: 2rem;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.5s forwards 1s;
-            color: var(--cream-white);
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .heart {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            animation: heartbeat 1.5s infinite;
-        }
-
-        .heart svg {
-            width: 40px;
-            height: 40px;
-            fill: var(--cream-white);
-            filter: drop-shadow(2px 2px 8px rgba(0, 0, 0, 0.3));
-        }
-
-        /* Countdown */
-        .countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin: 2rem 0;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 1.5s forwards 1.5s;
-        }
-
-        .countdown-item {
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            padding: 15px 10px;
-            min-width: 80px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(138, 90, 109, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.5);
-        }
-
-        .countdown-number {
-            font-size: 2rem;
-            font-weight: bold;
-            display: block;
-            color: var(--cream-white);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .countdown-label {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            color: var(--cream-white);
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Calendar Section */
-        .calendar-section {
-            padding: 80px 0;
-            background: var(--light-color);
-            text-align: center;
-        }
-
-        .calendar-container {
-            max-width: 500px;
-            margin: 40px auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 158, 181, 0.2);
-            padding: 30px;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid var(--secondary-color);
-        }
-
-        .calendar-header {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            color: var(--dark-pink);
-        }
-
-        .calendar {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .calendar-day {
-            font-weight: bold;
-            padding: 8px;
-            color: var(--primary-color);
-            font-size: 0.9rem;
-        }
-
-        .calendar-date {
-            padding: 8px;
-            border-radius: 50%;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .calendar-date:hover {
-            background: var(--accent-color);
-        }
-
-        .wedding-day {
-            background: var(--primary-color);
-            color: white;
-            position: relative;
-            font-weight: bold;
-        }
-
-        .wedding-day::after {
-            content: '';
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            width: 16px;
-            height: 16px;
-            animation: pulse 2s infinite;
-        }
-
-        .wedding-day::after {
-            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath fill='%23dc3545' d='M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z'/%3E%3C/svg%3E");
-            background-size: contain;
-        }
-
-        /* Parents Section */
-        .parents-section {
-            padding: 80px 0;
-            background: var(--accent-color);
-            text-align: center;
-        }
-
-        .parents-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .parent-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 5px 20px rgba(255, 158, 181, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            transform: translateX(-50px);
-            border: 2px solid var(--secondary-color);
-        }
-
-        .parent-card.right {
-            transform: translateX(50px);
-        }
-
-        .parent-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 158, 181, 0.3);
-        }
-
-        .parent-title {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: var(--dark-pink);
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .parent-name {
-            font-size: 1.2rem;
-            margin: 10px 0;
-            color: var(--text-color);
-        }
-
-        .parent-couple {
-            font-size: 1.4rem;
-            margin: 15px 0;
-            color: var(--dark-pink);
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .qr-container {
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .qr-code {
-            width: 150px;
-            height: 150px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 10px;
-            border: 2px dashed var(--primary-color);
-        }
-
-        .qr-text {
-            font-size: 0.9rem;
-            color: var(--text-color);
-            text-align: center;
-        }
-
-        /* Sections */
-        .section {
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        .section-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 3.5rem;
-            margin-bottom: 2rem;
-            color: var(--dark-pink);
-            position: relative;
-            font-weight: 500;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 100px;
-            height: 2px;
-            background: var(--secondary-color);
-            margin: 10px auto;
-        }
-
-        /* Our Story */
-        .our-story {
-            background: #fff;
-            position: relative;
-        }
-
-        .story-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .story-image {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transform: rotate(-2deg);
-            transition: transform 0.5s;
-            opacity: 0;
-            transform: translateX(-50px) rotate(-2deg);
-        }
-
-        .story-image.right {
-            transform: translateX(50px) rotate(2deg);
-        }
-
-        .story-image:hover {
-            transform: rotate(0deg) scale(1.05);
-        }
-
-        .story-image img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        .story-text {
-            flex: 1;
-            min-width: 300px;
-            text-align: left;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            opacity: 0;
-            transform: translateX(50px);
-        }
-
-        /* Wedding Details */
-        .wedding-details {
-            background: var(--light-color);
-        }
-
-        .details-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .detail-card {
-            background: white;
-            border-radius: 20px;
-            padding: 25px;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 5px 20px rgba(255, 158, 181, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
-            opacity: 0;
-            transform: translateY(30px);
-            border: 2px solid var(--secondary-color);
-        }
-
-        .detail-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 158, 181, 0.3);
-        }
-
-        .detail-icon {
-            font-size: 2.5rem;
-            color: var(--dark-pink);
-            margin-bottom: 15px;
-        }
-
-        .detail-title {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-            color: var(--text-color);
-            font-family: 'Dancing Script', cursive;
-        }
-
-        .map-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-            display: inline-block;
-            margin-top: 15px;
-        }
-
-        .map-btn:hover {
-            background: var(--dark-pink);
-            transform: translateY(-3px);
-        }
-
-        /* Gallery - Updated for 2 images per row */
-        .gallery {
-            background: var(--accent-color);
-            padding: 80px 0;
-        }
-
-        .gallery-container {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .gallery-row {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .gallery-item {
-            flex: 1;
-            max-width: 500px;
-            border-radius: 20px;
-            overflow: hidden;
-            height: 400px;
-            position: relative;
-            cursor: pointer;
-            box-shadow: 0 10px 30px rgba(255, 158, 181, 0.3);
-            transition: transform 0.3s;
-            border: 3px solid var(--secondary-color);
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.05);
-        }
-
-        /* RSVP */
-        .rsvp {
-            background: linear-gradient(135deg, var(--accent-color), #ffe4ec);
-        }
-
-        .rsvp-form {
-            max-width: 600px;
-            margin: 40px auto 0;
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 158, 181, 0.2);
-            opacity: 0;
-            transform: translateY(30px);
-            border: 2px solid var(--secondary-color);
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--text-color);
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid var(--secondary-color);
-            border-radius: 10px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-            background: var(--light-color);
-        }
-
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-color);
-        }
-
-        .btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 30px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
-            display: inline-block;
-            width: 100%;
-        }
-
-        .btn:hover {
-            background: var(--dark-pink);
-            transform: translateY(-3px);
-        }
-
-        /* Thank You Section */
-        .thank-you {
-            height: 100vh;
-            background: linear-gradient(rgba(255, 158, 181, 0.3), rgba(255, 194, 212, 0.3)), url('https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--text-color);
-            position: relative;
-        }
-
-        .thank-you-content {
-            opacity: 0;
-            transform: translateY(30px);
-            background: rgba(255, 255, 255, 0.8);
-            padding: 40px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            border: 2px solid var(--secondary-color);
-            max-width: 90%;
-        }
-
-        .thank-you-title {
-            font-family: 'Great Vibes', cursive;
-            font-size: 4rem;
-            margin-bottom: 2rem;
-            color: var(--dark-pink);
-            font-weight: 500;
-        }
-
-        .thank-you-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 2rem;
-            max-width: 800px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--text-color);
-            color: var(--light-color);
-            padding: 40px 0;
-            text-align: center;
-        }
-
-        .footer-text {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-
-        .social-icons {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .social-icon {
-            color: var(--light-color);
-            font-size: 1.5rem;
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        .social-icon:hover {
-            color: var(--secondary-color);
-            transform: translateY(-5px);
-        }
-
-        /* Animations */
-        @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInLeft {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInRight {
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes fadeInScale {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes heartbeat {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.3);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-10px);
-            }
-            60% {
-                transform: translateY(-5px);
-            }
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Floating hearts */
-        .floating-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .floating-heart {
-            position: absolute;
-            animation: float 15s infinite linear;
-            opacity: 0.7;
-        }
-
-        .floating-heart svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--primary-color);
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-            }
-            100% {
-                transform: translateY(-100px) rotate(360deg);
-            }
-        }
-
-        /* Falling hearts */
-        .falling-hearts {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .falling-heart {
-            position: absolute;
-            animation: fall linear forwards;
-            opacity: 0.7;
-        }
-
-        .falling-heart svg {
-            width: 20px;
-            height: 20px;
-            fill: var(--primary-color);
-        }
-
-        @keyframes fall {
-            to {
-                transform: translateY(100vh) rotate(360deg);
-            }
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .welcome-title {
-                font-size: 3rem;
-            }
-            
-            .welcome-subtitle {
-                font-size: 1.5rem;
-            }
-            
-            .couple-names {
-                font-size: 3.5rem;
-                flex-direction: column;
-                gap: 10px;
-            }
-            
-            .wedding-date {
-                font-size: 1.8rem;
-            }
-            
-            .countdown {
-                flex-wrap: wrap;
-            }
-            
-            .countdown-item {
-                min-width: 70px;
-                padding: 10px 5px;
-            }
-            
-            .countdown-number {
-                font-size: 1.8rem;
-            }
-            
-            .section-title {
-                font-size: 2.8rem;
-            }
-            
-            .thank-you-title {
-                font-size: 3rem;
-            }
-            
-            .thank-you-text {
-                font-size: 1.6rem;
-            }
-            
-            .parent-card, .story-image, .story-text {
-                transform: none !important;
-            }
-            
-            .calendar-container {
-                padding: 20px;
-            }
-            
-            .calendar {
-                gap: 5px;
-            }
-            
-            .calendar-date, .calendar-day {
-                padding: 5px;
-                font-size: 0.8rem;
-            }
-            
-            .gallery-row {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .gallery-item {
-                height: 300px;
-                max-width: 100%;
-            }
-            
-            .qr-code {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .story-container {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .welcome-title {
-                font-size: 2.5rem;
-            }
-            
-            .welcome-subtitle {
-                font-size: 1.2rem;
-            }
-            
-            .couple-names {
-                font-size: 2.8rem;
-            }
-            
-            .wedding-date {
-                font-size: 1.5rem;
-            }
-            
-            .section-title {
-                font-size: 2.2rem;
-            }
-            
-            .countdown-item {
-                min-width: 60px;
-            }
-            
-            .countdown-number {
-                font-size: 1.5rem;
-            }
-            
-            .parent-card, .detail-card {
-                padding: 20px;
-            }
-            
-            .thank-you-content {
-                padding: 20px;
-            }
-            
-            .thank-you-title {
-                font-size: 2.5rem;
-            }
-            
-            .thank-you-text {
-                font-size: 1.3rem;
-            }
-            
-            .gallery-item {
-                height: 250px;
-            }
-        }
-
-        /* Scroll animations */
-        .fade-in {
-            opacity: 0;
-            transition: opacity 1s, transform 1s;
-        }
-
-        .fade-in-left {
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .fade-in-right {
-            opacity: 0;
-            transform: translateX(50px);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .fade-in-scale {
-            opacity: 0;
-            transform: scale(0.8);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .is-visible {
-            opacity: 1;
-            transform: translateX(0) translateY(0) scale(1);
-        }
-    </style>
+    <link rel="stylesheet" href="css.css">
+    <!-- Add Fancybox CSS and JS -->
+    <link href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.js"></script>
 </head>
 <body>
-    <!-- Welcome Screen -->
-    <div class="welcome-screen" id="welcomeScreen">
+   <div class="welcome-screen" id="welcomeScreen">
+        <img src="./img/thiep_moi.png" alt="Thiệp Mời" class="card-image">
+        
         <div class="welcome-content">
-            <h1 class="welcome-title">Thiệp Mời Đám Cưới</h1>
-            <p class="welcome-subtitle">Trân trọng kính mời bạn đến dự lễ thành hôn của chúng tôi</p>
             <button class="open-invitation" id="openInvitation">
-                Mở Thiệp Mời 
-                <svg style="width: 20px; height: 20px; margin-left: 10px; fill: currentColor;" viewBox="0 0 512 512">
-                    <path d="M241 87.1l15 20.7 15-20.7C296 52.5 336.2 32 378.9 32 452.4 32 512 91.6 512 165.1l0 2.6c0 112.2-139.9 242.5-212.9 298.2-12.4 9.4-27.6 14.1-43.1 14.1s-30.8-4.6-43.1-14.1C139.9 410.2 0 279.9 0 167.7l0-2.6C0 91.6 59.6 32 133.1 32 175.8 32 216 52.5 241 87.1z"/>
-                </svg>
+                <i class="fas fa-arrow-right arrow-icon"></i>
             </button>
         </div>
+        
         <div class="welcome-hearts" id="welcomeHearts"></div>
     </div>
 
@@ -1046,7 +43,7 @@
                 </span>
                 Thùy Trang
             </h1>
-            <p class="wedding-date">04 . 12 . 2025</p>
+            <p class="wedding-date">03 . 12 . 2025</p>
             
             <div class="countdown">
                 <div class="countdown-item">
@@ -1086,8 +83,8 @@
                         <div class="calendar-date"></div>
                         <div class="calendar-date">1</div>
                         <div class="calendar-date">2</div>
-                        <div class="calendar-date">3</div>
-                        <div class="calendar-date wedding-day">4</div>
+                        <div class="calendar-date wedding-day">3</div>
+                        <div class="calendar-date">4</div>
                         <div class="calendar-date">5</div>
                         <div class="calendar-date">6</div>
                         
@@ -1135,27 +132,15 @@
                 <div class="parents-container">
                     <div class="parent-card fade-in-left">
                         <h3 class="parent-title">Nhà Trai</h3>
-                        <div class="parent-name">Ông Nguyễn Văn A</div>
-                        <div class="parent-name">Bà Nguyễn Thị C</div>
+                        <div class="parent-name">Ông Lê Văn Thân</div>
+                        <div class="parent-name">Bà Phùng Thị Liễu</div>
                         <div class="parent-couple">Chú rể: Việt Cường</div>
-                        <div class="qr-container">
-                            <div class="qr-code">
-                                <i class="fas fa-qrcode" style="font-size: 50px; color: var(--dark-pink);"></i>
-                            </div>
-                            <p class="qr-text">Quét mã QR để mừng cưới online</p>
-                        </div>
                     </div>
                     <div class="parent-card right fade-in-right">
                         <h3 class="parent-title">Nhà Gái</h3>
-                        <div class="parent-name">Ông Nguyễn Văn C</div>
-                        <div class="parent-name">Bà Nguyễn Thị D</div>
+                        <div class="parent-name">Ông Phùng Công Hùng</div>
+                        <div class="parent-name">Bà Nguyễn Thị Biên</div>
                         <div class="parent-couple">Cô dâu: Thùy Trang</div>
-                        <div class="qr-container">
-                            <div class="qr-code">
-                                <i class="fas fa-qrcode" style="font-size: 50px; color: var(--dark-pink);"></i>
-                            </div>
-                            <p class="qr-text">Quét mã QR để mừng cưới online</p>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -1167,17 +152,15 @@
                 <h2 class="section-title">Câu Chuyện Của Chúng Tôi</h2>
                 <div class="story-container">
                     <div class="story-image fade-in-left">
-                        <img src="https://images.unsplash.com/photo-1539635278303-d4002c07eae3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Our Story">
+                        <img src="./img/chuyen_tinh.jpg" alt="Our Story">
                     </div>
-                    <div class="story-text fade-in-right">
-                        <p>Chúng tôi gặp nhau vào một ngày mưa thu năm 2018, tại một quán cà phê nhỏ ở trung tâm thành phố. Từ cái nhìn đầu tiên, cả hai đều cảm nhận được một sự kết nối đặc biệt.</p>
-                        <p>Trải qua 5 năm bên nhau, chúng tôi đã cùng nhau vượt qua nhiều thử thách và xây dựng những kỷ niệm đẹp. Mỗi khoảnh khắc bên nhau đều là những trang sách quý giá trong cuốn nhật ký tình yêu của chúng tôi.</p>
-                        <p>Và bây giờ, chúng tôi muốn mời bạn cùng tham dự ngày trọng đại nhất của cuộc đời mình - ngày chúng tôi chính thức trở thành vợ chồng.</p>
-                    </div>
+                   <div class="story-text fade-in-right">
+                    <p>Chúng tôi gặp nhau bằng những điều giản đơn, nhưng lại đủ để tạo nên sự gắn kết đặc biệt. Từ những câu chuyện nhẹ nhàng, những lần vô tình chạm mắt, chúng tôi dần nhận ra sự xuất hiện của đối phương đã khiến cuộc sống trở nên ấm áp hơn.</p>
+                    <p>Hành trình đi cùng nhau không phải lúc nào cũng hoàn hảo, nhưng luôn trọn vẹn bằng sự thấu hiểu và yêu thương chân thành. Và hôm nay, chúng tôi chọn bước tiếp cùng nhau, viết nên một hành trình mới – nơi có sự đồng hành, sẻ chia và một tương lai đầy hy vọng.</p>
+                </div>
                 </div>
             </div>
         </section>
-
         <!-- Wedding Details Section -->
         <section class="section wedding-details">
             <div class="container">
@@ -1188,9 +171,9 @@
                             <i class="fas fa-glass-cheers"></i>
                         </div>
                         <h3 class="detail-title">Tiệc Cưới Nhà Trai</h3>
-                        <p>16:30 Tối - 04.12.2025</p>
+                        <p>15h00 - 03.12.2025</p>
                         <p>Tại gia</p>
-                        <p>Suối Hai, Ba Vì, Hà Nội</p>
+                        <p>Máy tính Việt Cường</p>
                         <button class="map-btn">Xem Bản Đồ</button>
                     </div>
                     <div class="detail-card fade-in-up" style="transition-delay: 0.4s;">
@@ -1198,60 +181,125 @@
                             <i class="fas fa-glass-cheers"></i>
                         </div>
                         <h3 class="detail-title">Tiệc Cưới Nhà Gái</h3>
-                        <p>16:30 Tối - 04.12.2025</p>
+                         <p>15h00 - 03.12.2025</p>
                         <p>Tại gia</p>
-                        <p>Suối Hai, Ba Vì, Hà Nội</p>
+                        <p>Cẩm An - Cẩm Lĩnh - Hà Nội</p>
                         <button class="map-btn">Xem Bản Đồ</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Gallery Section - Updated for 2 images per row -->
+        <!-- Gallery Section - Updated for Fancybox -->
         <section class="gallery">
             <div class="container">
-                <h2 class="section-title">Khoảnh Khắc Đẹp</h2>
-                <div class="gallery-container">
-                    <!-- Row 1 -->
-                    <div class="gallery-row fade-in-up">
+            <h2 class="section-title">Khoảnh Khắc Đẹp</h2>
+            <div class="gallery-container">
+                <div class="gallery-row fade-in-up">
+                    <!-- Image 1 -->
+                    <a href="./img/2.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 2">
                         <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 1">
+                            <img src="./img/2.jpg" alt="Khoảnh khắc 2">
                         </div>
+                    </a>
+                    <!-- Image 2 -->
+                    <a href="./img/3.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 3">
                         <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 2">
+                            <img src="./img/3.jpg" alt="Khoảnh khắc 3">
                         </div>
-                    </div>
-                    
-                    <!-- Row 2 -->
-                    <div class="gallery-row fade-in-up" style="transition-delay: 0.2s;">
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 3">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1519677100203-a0e668c92439?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 4">
-                        </div>
-                    </div>
-                    
-                    <!-- Row 3 -->
-                    <div class="gallery-row fade-in-up" style="transition-delay: 0.4s;">
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 5">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 6">
-                        </div>
-                    </div>
-                    
-                    <!-- Row 4 -->
-                    <div class="gallery-row fade-in-up" style="transition-delay: 0.6s;">
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1440589473619-3cde28941638?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 7">
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Khoảnh khắc 8">
-                        </div>
-                    </div>
+                    </a>
                 </div>
+                
+                <div class="gallery-row fade-in-up" style="transition-delay: 0.2s;">
+                    <!-- Image 3 -->
+                    <a href="./img/4.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 4">
+                        <div class="gallery-item">
+                            <img src="./img/4.jpg" alt="Khoảnh khắc 4">
+                        </div>
+                    </a>
+                    <!-- Image 4 -->
+                    <a href="./img/5.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 5">
+                        <div class="gallery-item">
+                            <img src="./img/5.jpg" alt="Khoảnh khắc 5">
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="gallery-row fade-in-up" style="transition-delay: 0.4s;">
+                    <!-- Image 5 -->
+                    <a href="./img/6.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 6">
+                        <div class="gallery-item">
+                            <img src="./img/6.jpg" alt="Khoảnh khắc 6">
+                        </div>
+                    </a>
+                    <!-- Image 6 -->
+                    <a href="./img/7.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 7">
+                        <div class="gallery-item">
+                            <img src="./img/7.jpg" alt="Khoảnh khắc 7">
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="gallery-row fade-in-up" style="transition-delay: 0.6s;">
+                    <!-- Image 7 -->
+                    <a href="./img/8.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 8">
+                        <div class="gallery-item">
+                            <img src="./img/8.jpg" alt="Khoảnh khắc 8">
+                        </div>
+                    </a>
+                    <!-- Image 8 -->
+                    <a href="./img/9.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 9">
+                        <div class="gallery-item">
+                            <img src="./img/9.jpg" alt="Khoảnh khắc 9">
+                        </div>
+                    </a>
+                </div>
+
+                  <div class="gallery-row fade-in-up" style="transition-delay: 0.4s;">
+                    <!-- Image 9 -->
+                    <a href="./img/10.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 10">
+                        <div class="gallery-item">
+                            <img src="./img/10.jpg" alt="Khoảnh khắc 10">
+                        </div>
+                    </a>
+                    <!-- Image 10 -->
+                    <a href="./img/11.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 11">
+                        <div class="gallery-item">
+                            <img src="./img/11.jpg" alt="Khoảnh khắc 11">
+                        </div>
+                    </a>
+                </div>
+
+                <div class="gallery-row fade-in-up" style="transition-delay: 0.4s;">
+                    <!-- Image 11 -->
+                    <a href="./img/12.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 12">
+                        <div class="gallery-item">
+                            <img src="./img/12.jpg" alt="Khoảnh khắc 12">
+                        </div>
+                    </a>
+                    <!-- Image 12 -->
+                    <a href="./img/13.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 13">
+                        <div class="gallery-item">
+                            <img src="./img/13.jpg" alt="Khoảnh khắc 13">
+                        </div>
+                    </a>
+                </div>
+
+                   <div class="gallery-row fade-in-up" style="transition-delay: 0.4s;">
+                    <!-- Image 11 -->
+                    <a href="./img/14.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 14">
+                        <div class="gallery-item">
+                            <img src="./img/14.jpg" alt="Khoảnh khắc 14">
+                        </div>
+                    </a>
+                    <!-- Image 12 -->
+                    <a href="./img/15.jpg" data-fancybox="gallery" data-caption="Khoảnh khắc 15">
+                        <div class="gallery-item">
+                            <img src="./img/15.jpg" alt="Khoảnh khắc 15">
+                        </div>
+                    </a>
+                </div>
+            </div>
             </div>
         </section>
 
@@ -1358,9 +406,9 @@
             }, 1500);
         });
 
-        // Countdown timer - UPDATED FOR DECEMBER 4, 2025
+        // Countdown timer - UPDATED FOR DECEMBER 3, 2025
         function updateCountdown() {
-            const weddingDate = new Date('December 4, 2025 10:00:00').getTime();
+            const weddingDate = new Date('December 3, 2025 10:00:00').getTime();
             const now = new Date().getTime();
             const distance = weddingDate - now;
 
