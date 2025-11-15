@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Thiệp Mời Đám Cưới - Việt Cường & Thùy Trang</title>
+
+    <meta property="og:title" content="Thiệp Mời Đám Cưới Việt Cường & Thùy Trang">
+    <meta property="og:description" content="Chúng tôi trân trọng kính mời quý vị đến dự lễ thành hôn của chúng tôi.">
+    <meta property="og:image" content="https://vietcuong-thuytrang-wedding.netlify.app/img/1.jpg"> 
+    <meta property="og:url" content="https://vietcuong-thuytrang-wedding.netlify.app/"> 
+    <meta property="og:type" content="website">
+
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Playfair+Display:wght@400;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css.css">
@@ -13,7 +20,7 @@
 </head>
 <body>
    <div class="welcome-screen" id="welcomeScreen">
-        <img src="./img/thiep_moi.png" alt="Thiệp Mời" class="card-image">
+        <img src="./img/thiep_moi_1.png" alt="Thiệp Mời" class="card-image">
         
         <div class="welcome-content">
             <button class="open-invitation" id="openInvitation">
@@ -162,7 +169,7 @@
             </div>
         </section>
         <!-- Wedding Details Section -->
-        <section class="section wedding-details">
+     <section class="section wedding-details">
             <div class="container">
                 <h2 class="section-title">Thông Tin Lễ Cưới</h2>
                 <div class="details-container">
@@ -174,7 +181,7 @@
                         <p>15h00 - 03.12.2025</p>
                         <p>Tại gia</p>
                         <p>Máy tính Việt Cường</p>
-                        <button class="map-btn">Xem Bản Đồ</button>
+                        <button class="map-btn" data-map-link="https://maps.app.goo.gl/7PmXsWLkijRXcrft6?g_st=iz">Xem Bản Đồ</button>
                     </div>
                     <div class="detail-card fade-in-up" style="transition-delay: 0.4s;">
                         <div class="detail-icon">
@@ -184,7 +191,7 @@
                          <p>15h00 - 03.12.2025</p>
                         <p>Tại gia</p>
                         <p>Cẩm An - Cẩm Lĩnh - Hà Nội</p>
-                        <button class="map-btn">Xem Bản Đồ</button>
+                        <button class="map-btn" data-map-link="https://maps.app.goo.gl/EJGJQAXwq2rHCPMS7?g_st=iz">Xem Bản Đồ</button>
                     </div>
                 </div>
             </div>
@@ -388,20 +395,16 @@
             const welcomeScreen = document.getElementById('welcomeScreen');
             const mainContent = document.getElementById('mainContent');
             
-            // Add fade out animation to welcome screen
             welcomeScreen.style.opacity = '0';
             welcomeScreen.style.transform = 'scale(1.1)';
             
-            // Show main content after delay
             setTimeout(() => {
                 welcomeScreen.style.display = 'none';
                 mainContent.style.opacity = '1';
                 
-                // Start background animations
                 createFloatingHearts();
                 createFallingHearts();
                 
-                // Start scroll animations
                 initScrollAnimations();
             }, 1500);
         });
@@ -486,9 +489,17 @@
         });
 
         // Map buttons
-        document.querySelectorAll('.map-btn').forEach(button => {
+       document.querySelectorAll('.map-btn').forEach(button => {
             button.addEventListener('click', function() {
-                alert('Tính năng xem bản đồ sẽ được kích hoạt khi tích hợp với Google Maps API.');
+                // Lấy liên kết từ thuộc tính data-map-link
+                const mapLink = this.getAttribute('data-map-link');
+                
+                if (mapLink) {
+                    // Mở liên kết bản đồ trong tab mới
+                    window.open(mapLink, '_blank');
+                } else {
+                    alert('Không tìm thấy liên kết bản đồ.');
+                }
             });
         });
 
